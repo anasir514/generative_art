@@ -19,7 +19,7 @@ https://www.youtube.com/watch?v=KJe9H6qS82I
 """
 
 import math
-
+import os
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import animation
@@ -215,9 +215,13 @@ class SmoothLife:
             c = np.random.randint(0, self.width - radius)
             self.field[r:r+radius, c:c+radius] = intensity
         # self.esses_count = 0
+def get_filename():
+    dir_path=os.path.split(os.path.dirname(os.path.abspath(__file__)))[-2]
+    image_path = os.path.join(dir_path, "generative_art/images/")
+    print("path == ",image_path)
+    return image_path
 
-
-
+import uuid
 def show_animation():
     w = 1 << 9
     h = 1 << 9
@@ -230,13 +234,17 @@ def show_animation():
     fig = plt.figure()
     # Nice color maps: viridis, plasma, gray, binary, seismic, gnuplot
     im = plt.imshow(sl.field, animated=True,
-                    cmap=plt.get_cmap("viridis"), aspect="equal")
+                    cmap=plt.get_cmap("seismic"), aspect="equal")
 
     def animate(*args):
         im.set_array(sl.step())
         return (im, )
 
+    run_id = uuid.uuid1()
     ani = animation.FuncAnimation(fig, animate, interval=60, blit=True)
+    path = get_filename()
+    ani.save(f'{path}/{run_id}.png')
+    
     plt.show()
 
 
@@ -275,4 +283,4 @@ def save_animation():
 
 if __name__ == '__main__':
     show_animation()
-    save_animation()
+    #save_animation()
