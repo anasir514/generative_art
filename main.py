@@ -2,7 +2,8 @@ import random
 import os
 import uuid
 from PIL import Image, ImageDraw
-# pip install Pillow
+
+# python -m pip install --upgrade pip   ,  python -m pip install --upgrade pillow
 
 def get_filename():
     dir_path=os.path.split(os.path.dirname(os.path.abspath(__file__)))[-2]
