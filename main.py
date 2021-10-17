@@ -1,4 +1,5 @@
 import random
+import urllib.request
 import os
 import uuid
 from PIL import Image, ImageDraw
@@ -11,14 +12,25 @@ def get_filename():
     print("path == ",image_path)
     return image_path
 
+# download
+def dl_image():
+  img_url = "https://source.unsplash.com/random/2560x1080"
+  img_name = os.path.basename(img_url)
+  urllib.request.urlretrieve(img_url,img_name + '.jpg') # save pic in folder
+  print('Download image {}'.format(img_name + '.jpg'))
+  return (img_name+'.jpg')
+
 def draw_image():
     run_id = uuid.uuid1()
     
     print(f'Processing run_id: {run_id}')
-    
-    image = Image.new('RGB', (2000, 2000))
-    width, height = image.size
-    
+    image_file = os.path.join(os.path.dirname(os.path.realpath(__file__)),'2560x1080.jpg')
+    image = Image.open(image_file)
+    #image= Image.new(dl_image())
+    #image = Image.new('RGB', (2000, 2000))
+    #width, height = image.size
+    width, height = 2560,1080
+
     rectangle_width = 100
     rectangle_height = 100
     

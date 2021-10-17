@@ -260,7 +260,7 @@ def save_animation():
     # We'll do it manually. Ugh
 #C:\Users\platn\Desktop\Programs\art\generative_art\env\ffmpeg
     import skvideo
-    skvideo.setFFmpegPath('/mnt/c/Users/platn/Desktop/Programs/art/generative_art/env/ffmpeg/ffmpeg-N-104359-g9b445663a5-win64-gpl-shared/bin/ffprobe.exe')
+    skvideo.setFFmpegPath("/usr/local/bin")
     import skvideo.io
     from skvideo.io import FFmpegWriter
     from matplotlib import cm
@@ -283,4 +283,4 @@ def save_animation():
 
 if __name__ == '__main__':
     show_animation()
-    #save_animation()
+    save_animation()
